@@ -1,0 +1,79 @@
+* {
+  font-family: Helvetica;
+  outline: none;
+}
+
+:root {
+  --n: 2;
+}
+
+.wrapper {
+	width: 100%;
+}
+
+h2, h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+input {
+  height: 20px;
+  width: 300px;
+  font-size: 14px;
+  color: #333;
+  border: 2px solid #e7e5e3;
+  border-radius: 2px;
+  background-color: #f5f2f0;
+}
+
+.button_wrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.button_start_game {
+  padding: 4px 12px;
+  color: #568dca;
+  border: 2px solid #568dca;
+  border-radius: 15px;
+}
+
+.card {
+	display: inline-block;
+	flex-direction: row;
+	text-align: center;
+	line-height: 5em;
+	margin-right: 3px;
+	margin-bottom: 3px;
+	width: calc(100%/(var(--n) + 1));
+	height: 100px;
+	font-size: 20px;
+	color: transparent;
+	border: 2px solid #568dca;
+	background-color: #568dca;
+  border-radius: 5px;
+	transition: 700ms ease;
+}
+
+.active {
+	color: #ba1000; 
+  background-color: transparent;
+	border-color: #ba1000;
+	transform: rotateY(360deg);
+}
+
+.nonactive {
+  color: black;
+	background-color: #568dca;
+  transform: rotateY(360deg);
+}
+
+.newGame {
+  display: flex;
+  margin: 20px calc(100%/3);
+  padding: 4px 12px;
+  color: #568dca;
+  border: 2px solid #568dca;
+  border-radius: 15px;
+}
