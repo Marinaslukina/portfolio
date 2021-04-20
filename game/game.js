@@ -1,17 +1,17 @@
-(function() {
+(() => {
 
 	function createAppTitle() {
-		let appTitle = document.createElement("h2");
+		const appTitle = document.createElement("h2");
 		appTitle.textContent = "Игра в пары";
 		return appTitle;
 	}
 
 	function createAppForm() {
-		let wrapper = document.createElement("div");
-		let form = document.createElement("form");
-		let input = document.createElement("input");
-		let buttonWrapper = document.createElement("div");
-		let button = document.createElement("button");
+		const wrapper = document.createElement("div");
+		const form = document.createElement("form");
+		const input = document.createElement("input");
+		const buttonWrapper = document.createElement("div");
+		const button = document.createElement("button");
 
 		buttonWrapper.classList.add("button_wrapper");
 		button.classList.add("button_start_game");
@@ -55,7 +55,7 @@
 
 	function createGame(number) {
 		let button;
-		let wrapper = document.createElement("div");
+		const wrapper = document.createElement("div");
 		wrapper.classList.add("wrapper");
 		const numberArray = createArray(number);
 
@@ -74,8 +74,8 @@
 	}
 
 	function createArray(number) {
-		let arr = [];
-		let len = number*number;
+		const arr = [];
+		const len = number*number;
 		for (let i = 0; i < len; i++) {
 			(i > (len/2) - 1) ? arr[i] = len - i : arr[i] = i + 1; 
 		}
@@ -91,7 +91,7 @@
 	}
 	
 	function createCard(content) {
-		let button = document.createElement("button");
+		const button = document.createElement("button");
 		button.classList.add("card");
 		button.textContent = content;
 		button.addEventListener("click", () => {
@@ -139,11 +139,11 @@
 	}
 
 	function timerGameOver(count) {
-		let timerText = document.createElement('h3');
+		const timerText = document.createElement('h3');
 		let startTimer;
 		clearInterval (startTimer);
 		let currentCount = 60;
-		startTimer = setInterval(function() { 
+		startTimer = setInterval(() => { 
 			if ((currentCount == 0) || (document.querySelectorAll('.nonactive').length === (count * count))) { 
 				let buttonsActive = document.querySelectorAll('.active');
 				buttonsActive.forEach(button => {
@@ -164,7 +164,7 @@
 	}
 
 	function gameOver() {
-		let button = document.createElement("button");
+		const button = document.createElement("button");
 		button.classList.add("newGame");
 		button.textContent = "Сыграть еще раз";
 		button.addEventListener("click", () => {
@@ -173,12 +173,12 @@
 		return button;
 	}
 
-	document.addEventListener('DOMContentLoaded', function() {
-		let itemForm = createAppForm();
+	document.addEventListener('DOMContentLoaded', () => {
+		const itemForm = createAppForm();
 		document.body.append(createAppTitle());
 		document.body.append(itemForm.wrapper);
 		
-		itemForm.form.addEventListener('submit', function(e) {
+		itemForm.form.addEventListener('submit', e => {
 			e.preventDefault();
 			if (!itemForm.input.value) {
 				return;
