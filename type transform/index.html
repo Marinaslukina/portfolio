@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0">
+    <title>Студенты</title>
+    <link 
+        rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script defer src="./students-form_1.js"></script>
+</head>
+<body>
+	<div class="container mt-3 needs-validation" novalidate>
+		<form name="student needs-validation">
+			<div class="row">
+				<div class="col-4 mb-1">
+					<label class="col col-form-label" for="inputName">Имя</label>
+					<div class="col">
+						<input class="form-control validation" type="text" id="inputName" name="name">
+						<div class="invalid-feedback"></div>
+						<div class="valid-feedback">Все хорошо!</div>
+					</div> 
+				</div>
+				<div class="col-4 mb-3">
+					<label class="col col-form-label" for="inputSurname">Фамилия</label>
+					<div class="col">
+						<input class="form-control validation" type="text" id="inputSurname" name="surname">
+						<div class="invalid-feedback"></div>
+						<div class="valid-feedback">Все хорошо!</div>
+					</div> 
+				</div>
+				<div class="col-4 mb-3">
+					<label class="col col-form-label" for="inputMiddlename">Отчество</label>
+					<div class="col">
+						<input class="form-control validation" type="text" id="inputMiddlename" name="middlename">
+						<div class="invalid-feedback"></div>
+						<div class="valid-feedback">Все хорошо!</div>
+					</div> 
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col mb-3">
+					<label class="col col-form-label" for="inputDate">Дата рождения</label>
+					<div class="col">
+						<input class="form-control validation" type="date" id="inputDate" name="date">
+						<div class="invalid-feedback"></div>
+						<div class="valid-feedback">Все хорошо!</div>
+					</div> 
+				</div>
+				<div class="col mb-3">
+					<label class="col col-form-label" for="inputYear">Год начала обучения</label>
+					<div class="col">
+						<input class="form-control validation" type="number" id="inputYear" name="year">
+						<div class="invalid-feedback"></div>
+						<div class="valid-feedback">Все хорошо!</div>
+					</div> 
+				</div>
+				<div class="col mb-3">
+					<label class="col col-form-label" for="inputFaculty">Факультет</label>
+					<div class="col">
+						<input class="form-control validation" type="text" id="inputFaculty" name="faculty">
+						<div class="invalid-feedback"></div>
+						<div class="valid-feedback">Все хорошо!</div>
+					</div> 
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Отправить</button>
+		</form>
+	</div>
+
+	<div class="container mt-3">
+		<div class="input-group col-5 mb-1">
+			<span class="input-group-text">ФИО</span>
+			<input type="text" class="form-control search" placeholder="">
+		</div>
+		<div class="input-group col-5 mb-1">
+			<span class="input-group-text">Факультет</span>
+			<input type="text" class="form-control search">
+		</div>
+		<div class="input-group col-5 mb-1">
+			<span class="input-group-text">Год начала обучения</span>
+			<input type="text" class="form-control search">
+		</div>
+		<div class="input-group col-5 mb-1">
+			<span class="input-group-text">Год окончания обучения</span>
+			<input type="number" class="form-control search">
+		</div>
+	</div>
+
+	<div class="container mt-3">
+		<table class="table mt-3">
+			<thead>
+				<tr>
+					<th>ФИО</th>
+					<th>Факультет</th>
+					<th>Дата рождения</th>
+					<th>Года обучения</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Иванов Иван Иванович</td>
+					<td>Математики</td>
+					<td>01.02.1990 (31 лет)</td>
+					<td>2004-2008 (закончил)</td>
+				</tr>
+				<tr>
+					<td>Петров Николай Семенович</td>
+					<td>Физики</td>
+					<td>16.10.2000 (20 лет)</td>
+					<td>2021-2025 (1 курс)</td>
+				</tr>
+				<tr>
+					<td>Иванова Мария Николаевна</td>
+					<td>Физики</td>
+					<td>08.03.1998 (23 лет)</td>
+					<td>2020-2024 (2 курс)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
