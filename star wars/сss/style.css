@@ -1,0 +1,380 @@
+@font-face {
+	font-family: 'Deathstar';
+	src: url('../fonts/distgrg_-webfont.woff2') format('woff2'),
+	url('../fonts/distgrg_-webfont.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Anakin';
+	src: url('../fonts/anakinmonoregular-n1lp-webfont.woff2') format('woff2'),
+	url('../fonts/anakinmonoregular-n1lp-webfont.woff') format('woff');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Greyscale';
+	src: url('../fonts/greyscale_basic_regular-webfont.woff2') format('woff2'),
+	url('../fonts/greyscale_basic_regular-webfont.woff') format('woff');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'StarJedi';
+	src: url('../fonts/StarJediHollow-A4lL.woff2') format('woff2'),
+	url('../fonts/StarJediHollow-A4lL.woff') format('woff');
+	font-weight: 200;
+	font-style: normal;
+}
+
+
+:root {
+	--hover: #ebd800;
+	/* card - на главной странице */
+	--card-background: #2e2f3e;
+	--card-border: black;
+	--card-heading: #fffffe;
+	--card-paragraph: #a7a9be;
+	/* det - детальная страница эпизода */
+	--det-title: #fffffe;
+	--det-paragraph: #a7a9be;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+h1, h2 {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Deathstar';
+	font-weight: 400;
+	background-color: #0f0e17;
+  color: white;
+}
+
+/* loader */
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to{
+    transform: rotate(359deg);
+  }
+}
+
+.spinner-box {
+  /* width: 300px; */
+	grid-area: loader;
+	grid-column: 2 / 3;
+	margin: auto 0; /* центрирование по вертикалии */
+	width: auto;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.circle-border {
+  width: 150px;
+  height: 150px;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgb(63,249,220);
+  background: linear-gradient(0deg, rgba(63,249,220,0.1) 33%, rgba(63,249,220,1) 100%);
+  animation: spin .8s linear 0s infinite;
+}
+
+.circle-core {
+  width: 100%;
+  height: 100%;
+	background-color: #0f0e17;
+  border-radius: 50%;
+}
+
+.loaded_hiding {
+	opacity: 0;
+}
+
+.loaded {
+	transition: 0.3s opacity;
+	display: none;
+}
+/*  */
+.grid-wrapper{
+	min-height: 100%; /*на весь экран*/
+	display: grid;
+	/*grid-template: [grid-template-rows] / [grid-template-columns];*/
+	grid-template-rows: minmax(100px, auto) 1fr minmax(70px, auto);
+	grid-template-columns: 1fr;
+	grid-template-areas:
+						"header"
+						"loader"
+						"main";
+}
+
+.header{
+	grid-area: header;
+	margin: auto 0; /* центрирование по вертикалии */
+}
+
+.header__title {
+	text-align: center;  /* выравнивание текста по центру */
+	margin: 0;
+	font-size: 48px;
+	font-weight: 400;
+	color: #fffffe;
+}
+
+.header__link:hover {
+	cursor: pointer;
+	color: var(--hover);
+	transition: .2s ease;
+}
+
+/*main*/
+
+.main {
+	grid-area: main;
+	display: grid;
+	/*grid-template: [grid-template-rows] / [grid-template-columns];*/
+	grid-template-rows: 1fr;
+	grid-template-columns: minmax(10px, 150px) 1fr minmax(10px, 150px);
+}
+
+.nav {
+	grid-column: 2 / 3; /* начинается на 2 колонке заканчивается на 3*/
+}
+
+.catalog__item {
+	row-gap: 10px;
+	display: grid;
+	grid-template-columns: minmax(500px, 5fr) minmax(300px, 4fr);
+	grid-template-rows: 1fr 4fr;
+	grid-template-areas:
+						"title image"
+						"description image";
+
+	margin-bottom: 30px;					/* padding: 0 80px 10px 80px; */
+	background-color: var(--card-background);
+	border-radius: 10px;
+	border: 2px solid var(--card-border);
+}
+
+.catalog__title,
+.catalog__description,
+.catalog__img {
+	margin: 10px;
+}
+
+.catalog__title {
+	grid-area: title;
+	font-family: 'Greyscale';
+	font-size: 28px;
+	color: var(--card-heading);
+}
+
+.catalog__title:hover {
+	cursor: pointer;
+	color: var(--hover);
+	transition: .2s ease;
+}
+
+.catalog__link:hover {
+	cursor: pointer;
+	color: var(--hover);
+	transition: .2s ease;
+}
+
+.catalog__description {
+	grid-area: description;
+	font-family: 'Greyscale';
+	font-size: 17px;
+	line-height: 23px;
+	color: var(--card-paragraph);
+}
+
+.catalog__img {
+	grid-area: image;
+	/* width: 100%; */
+	/* height: 100%; */
+}
+
+/* details */
+
+/* section about-episode */
+
+.section-border {
+	border-bottom: 2px solid #555;
+}
+
+.about-episode {
+	display: grid;
+	grid-column: 2 / 3;
+	grid-template-columns: 1fr 3fr;
+	grid-template-rows: 1fr 3fr;
+	grid-template-areas:
+						"image title"
+						"image description";
+}
+
+.about-episode__title,
+.about-episode__description,
+.about-episode__img {
+	margin: 10px;
+}
+
+.about-episode__title {
+	grid-area: title;
+	font-family: 'StarJedi';
+	font-size: 35px;
+	color: var(--det-title);
+}
+
+.about-episode__description {
+	grid-area: description;
+	font-family: 'Greyscale';
+	font-size: 20px;
+	color: var(--det-paragraph);
+}
+
+.about-episode__img {
+	grid-area: image;
+}
+
+/* section planets */
+
+.planets {
+	display: grid;
+	grid-column: 2 / 3;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto;
+}
+
+.planets__title,
+.species__title {
+	padding-top: 20px;
+	padding-bottom: 22px;
+	font-family: 'StarJedi';
+}
+
+.planets__list {
+  display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: auto;
+}
+.species__list {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: auto;
+	margin: 10px 0 10px 0;
+}
+
+.planets__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.planets__card_title,
+.species__card_title {
+	text-align: center;  /* выравнивание текста по центру */
+	font-family: 'Greyscale';
+	font-size: 25px;
+	color: var(--card-paragraph);
+}
+
+.planets__card_img-wrapper,
+.species__card_img-wrapper {
+	height: 100px;
+  width: 100%;
+  background: wheat;
+  margin: 0.5rem 0;
+}
+
+/* species */
+
+.species {
+	display: grid;
+	grid-column: 2 / 3;
+}
+
+@media (max-width: 1024px) {
+	.catalog__item {
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 2fr 4fr;
+		grid-template-areas:
+						"title"
+						"description"
+						"image";
+	}
+}
+/* меньше или равно 1440px */
+@media (max-width: 1440px) and (min-width: 1024px) {
+	.about-episode {
+		grid-template-rows: 1fr 1.8fr;
+	}
+}
+/* меньше или равна  1024px*/
+@media (max-width: 1024px) {
+	.header__title {
+		font-size: 40px;
+	}
+	.main {
+		grid-template-columns: 25px 1fr 25px;
+	}
+	.about-episode {
+		grid-template-columns: 2fr 4fr;
+		grid-template-rows: 1fr 3fr;
+	}
+	.about-episode__title {
+		font-size: 20px;
+	}
+}
+
+@media (max-width: 768px) {
+	.about-episode {
+		grid-template-columns: 2fr 4fr;
+		grid-template-rows: 1fr 2fr;
+	}
+	.about-episode__title,
+	.planets__title,
+	.species__title {
+		font-size: 18px;
+	}
+	.planets__card_title,
+	.species__card_title {
+		font-size: 15px;
+	}
+}

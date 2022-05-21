@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars</title>
+	<link rel="stylesheet" href="./сss/style.css">
+	<script type="module">
+		import {
+			getData
+		} from './files/api.js';
+
+		import {
+			createLoader,
+			createCatalog
+		} from './files/view.js';
+
+		window.onload = function() {
+			document.querySelector('.main').append(createLoader());
+				Promise.all([
+					getData(4),
+					getData(5),
+					getData(6),
+					getData(1),
+					getData(2),
+					getData(3)
+				]).then(res => {
+					document.querySelector('.spinner-box').classList.add('loaded');
+					res.forEach(cardData => createCatalog(cardData));
+				})
+		}
+
+	</script>
+</head>
+<body>
+	<div class="grid-wrapper">
+		<header class="header">
+				<h1 class="header__title">
+					<a href="/index.html" class="header__link">
+							STAR WARS
+					</a>
+				</h1>
+		</header>
+		<main class="main">
+			<nav class="nav">
+				<ul class="catalog">
+
+				</ul>
+			</nav>
+		</main>
+	</div>
+</body>
+</html>
