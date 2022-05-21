@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +8,100 @@
     <title>TODO</title>
     <link 
         rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script defer src="./todo-app.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            createTodoApp(document.getElementById('todo-app'), 'Мои дела', "myTodos");
-        });
+    <script type="module">
+    const buttonStorage = document.getElementById('storage');
+		
+		function removingChildren(list) {
+			console.log(list.childNodes.length);
+			while (list.childNodes.length != 2) {
+				list.removeChild(list.lastChild);
+			}
+		}
+
+		import { createTodoApp } from './todo-app/view.js';
+		//api//
+		import { 
+			getTodoList,
+			createTodoItem,
+			switchTodoItem,
+			deleteTodoItem,
+		} from './todo-app/api.js';
+		////
+		const owner = 'Я';
+		//// 
+		
+		//local//
+		import {
+			getLocalTodoList,
+			createLocalTodoItem,
+			addToLocalStorage,
+			switchLocalTodoItem,
+			deleteLocalTodoItem
+		} from './todo-app/local.js';
+		//если buttonStorage содержит api, значит подключаем api и текст перейти на локальное. 
+		//если buttonStoragt содержит local, то подключаем local и текст перейти на серверное хранилище
+		// localStorage.setItem("isLocale", false). создать локальную переменную, которая будет отвечать за то, какое хранилище сейчас
+		if (buttonStorage.classList.contains('api')) {
+				(async () => {
+					const todoItemList = await getTodoList(owner);
+					createTodoApp(document.getElementById('todo-app'), {
+						title: 'Мои дела', 
+						owner,
+						todoItemList,
+						onCreateFormSubmit: createTodoItem,
+						onDoneClick: switchTodoItem,
+						onDeleteClick: deleteTodoItem,
+					});
+				})();
+			} else if (buttonStorage.classList.contains('local')) {
+				const list = getLocalTodoList('myTodos');
+				const todoLocalItemList = list.filter((item) => item.owner === owner);
+				createTodoApp(document.getElementById('todo-app'), {
+					title: 'Мои дела', 
+					owner,
+					todoItemList: todoLocalItemList,
+					onCreateFormSubmit: createLocalTodoItem,
+					onDoneClick: switchLocalTodoItem,
+					onDeleteClick: deleteLocalTodoItem,
+				});
+			}
+		////	
+		//если buttonStorage содержит класс api, то 1) убрать класс api 2) добавить класс local 3) поменять текст кнопки на перейти на серверное хранилище 4) подключить локальное хранилище
+		//если buttonStoragt содержит класс local, то 1) убрать класс local 2) добавить класс api 3) поменять текст кнопки на перейти на локальное хранилище 4) подключить серверное хранилище
+		buttonStorage.addEventListener('click', () => {
+			if (buttonStorage.classList.contains('api')) {
+				removingChildren(document.getElementById('todo-app'));
+				buttonStorage.classList.remove('api');
+				buttonStorage.classList.add('local');
+				buttonStorage.textContent = 'Перейти на серверное хранилище';
+				const list = getLocalTodoList('myTodos');
+				const todoLocalItemList = list.filter((item) => item.owner === owner);
+				createTodoApp(document.getElementById('todo-app'), {
+					title: 'Мои дела', 
+					owner,
+					todoItemList: todoLocalItemList,
+					onCreateFormSubmit: createLocalTodoItem,
+					onDoneClick: switchLocalTodoItem,
+					onDeleteClick: deleteLocalTodoItem,
+				});
+			} else if (buttonStorage.classList.contains('local')) {
+				removingChildren(document.getElementById('todo-app'));
+				buttonStorage.classList.remove('local');
+				buttonStorage.classList.add('api');
+				buttonStorage.textContent = 'Перейти на локальное хранилище';
+				(async () => {
+					const todoItemList = await getTodoList(owner);
+					createTodoApp(document.getElementById('todo-app'), {
+						title: 'Мои дела', 
+						owner,
+						todoItemList,
+						onCreateFormSubmit: createTodoItem,
+						onDoneClick: switchTodoItem,
+						onDeleteClick: deleteTodoItem,
+					});
+				})();			
+			}
+		})
     </script>
 </head>
 <body>
@@ -23,6 +112,12 @@
             <a href="mom.html" class="nav-link">Дела мамы</a>
         </nav>
     </div>
-    <div id="todo-app" class="container"></div>
+    <div id="todo-app" class="container">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-secondary btn-sm local" id="storage">
+                Перейти на серверное хранилище
+            </button>
+        </div>
+    </div>
 </body>
 </html>
