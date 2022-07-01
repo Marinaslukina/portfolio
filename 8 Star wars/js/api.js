@@ -1,5 +1,3 @@
-import {createContent} from '/js/episode-details.js';
-
 function fetchJson(url) {
 	return fetch(url).then(res => res.json());
 }
