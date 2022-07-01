@@ -52,7 +52,7 @@ export function createContent({ episodeId, episodeTitle, episodeDescription }, p
 	description.textContent = episodeDescription;
 	const img = document.createElement('div');
 	img.classList.add('about-episode__img');
-	img.style.background = `url('/img/episode/det_${episodeId}.jpeg') top/contain no-repeat`;
+	img.style.background = `url('./img/episode/det_${episodeId}.jpeg') top/contain no-repeat`;
 	//end
 	//create section planets//start
 	wrapper.append(title);
