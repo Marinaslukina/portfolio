@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/сss/style.css">
+	<script type="module">
+		import {
+			getData,
+			getProperty
+		} from '/files/api.js';
+
+		import {
+			createLoader,
+			createContent
+		} from '/files/view.js';
+
+		window.onload = function() {
+			document.querySelector('.main').prepend(createLoader());
+			const sectionTitle = document.querySelectorAll('.section');
+			for (let title of sectionTitle) {
+				title.classList.add('loaded');
+			}
+				const pageParams = new URLSearchParams(window.location.search);
+				const episodeId = Number(pageParams.get('id'));
+				let numberOfEpi = 0;
+				(episodeId < 4) ? numberOfEpi = episodeId + 3 :	numberOfEpi = episodeId - 3;
+				Promise.all([
+					getData(numberOfEpi),
+					getProperty(numberOfEpi, 'planets'),
+					getProperty(numberOfEpi, 'species')
+				]).then(([data, planets, spacies]) => {
+					document.querySelector('.spinner-box').classList.add('loaded');
+					for (let title of sectionTitle) {
+						title.classList.remove('loaded');
+						title.classList.add('section-border');
+					}
+					createContent(data, planets, spacies);
+				})
+		}
+
+	</script>
+</head>
+<body>
+	<div class="grid-wrapper">
+		<header class="header">
+			<div class="container header__container">
+				<h1 class="header__title">
+					<a href="/index.html" class="header__link">
+						STAR WARS
+					</a>
+				</h1>
+			</div>
+		</header>
+		<main class="main details">
+			<section class="about-episode section"></section>
+
+			<section class="planets section">
+        <h2 class="planets__title section">Planets</h2>
+        <div class="planets__list">
+
+        </div>
+			</section>
+
+			<section class="species section">
+				<h2 class="species__title section">Species</h2>
+        <div class="species__list">
+
+        </div>
+			</section>
+		</main>
+	</div>
+</body>
+</html>
