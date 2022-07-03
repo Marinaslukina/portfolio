@@ -33,7 +33,7 @@ function createSectionItem(title, propertyName) {
 	const cardImgWrapper = document.createElement('div');
 	cardImgWrapper.classList.add(`${propertyName}__card_img-wrapper`, 'card__img-wrapper')
 	let nameOfFile = title.replace(/[^a-zA-Z0-9\s]/gi, ' '); // удаляем спец символы из названия файла заменяем на пробел
-	cardImgWrapper.style.background = `url('/img/${propertyName}/${nameOfFile}.webp') center/contain no-repeat`;
+	cardImgWrapper.style.background = `url('./img/${propertyName}/${nameOfFile}.webp') center/contain no-repeat`;
 
 	cardWrapper.append(cardTitle);
 	cardWrapper.append(cardImgWrapper);
