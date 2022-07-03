@@ -1,25 +1,13 @@
 function convertArabicToRoman(numeral) {
-	switch (numeral) {
-		case 1:
-			numeral = '&#8544;';
-			break;
-		case 2:
-			numeral = '&#8545;';
-			break;
-		case 3:
-			numeral = '&#8546;';
-			break;
-		case 4:
-			numeral = '&#8547;';
-			break;
-		case 5:
-			numeral = '&#8548;';
-			break;
-		case 6:
-			numeral = '&#8549;';
-		break;
-	}
-	return numeral;
+  const data = [
+    '&#8544;',
+    '&#8545;',
+    '&#8546;',
+    '&#8547;',
+    '&#8548;',
+    '&#8549;'
+  ]
+	return data[numeral-1];
 }
 
 function createSectionItem(title, propertyName) {
@@ -33,7 +21,7 @@ function createSectionItem(title, propertyName) {
 	const cardImgWrapper = document.createElement('div');
 	cardImgWrapper.classList.add(`${propertyName}__card_img-wrapper`, 'card__img-wrapper')
 	let nameOfFile = title.replace(/[^a-zA-Z0-9\s]/gi, ' '); // удаляем спец символы из названия файла заменяем на пробел
-	cardImgWrapper.style.background = `url('/img/${propertyName}/${nameOfFile}.webp') center/contain no-repeat`;
+	cardImgWrapper.style.background = `url('./img/${propertyName}/${nameOfFile}.webp') center/contain no-repeat`;
 
 	cardWrapper.append(cardTitle);
 	cardWrapper.append(cardImgWrapper);
@@ -52,7 +40,7 @@ export function createContent({ episodeId, episodeTitle, episodeDescription }, p
 	description.textContent = episodeDescription;
 	const img = document.createElement('div');
 	img.classList.add('about-episode__img');
-	img.style.background = `url('/img/episode/det_${episodeId}.jpeg') top/contain no-repeat`;
+	img.style.background = `url('./img/episode/det_${episodeId}.jpeg') top/contain no-repeat`;
 	//end
 	//create section planets//start
 	wrapper.append(title);

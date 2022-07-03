@@ -56,7 +56,7 @@ function createCatalogItem(episodeId, episodeTitle, episodeDescription) {
 	catalogItemDescription.textContent = episodeDescription;
 	const catalogImg = document.createElement('div');
 	catalogImg.classList.add('catalog__img');
-	catalogImg.style.background = `url('/img/episode/epi_${episodeId}.jpeg') center/cover no-repeat`;
+	catalogImg.style.background = `url('./img/episode/epi_${episodeId}.jpeg') center/cover no-repeat`;
 
 	catalogItemTitle.append(catalogItemLink);
 	catalogItem.append(catalogItemTitle);
